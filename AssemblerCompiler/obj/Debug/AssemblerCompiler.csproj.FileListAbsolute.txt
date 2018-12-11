@@ -1,0 +1,7 @@
+C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\bin\Debug\AssemblerCompiler.exe.config
+C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\bin\Debug\AssemblerCompiler.exe
+C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\bin\Debug\AssemblerCompiler.pdb
+C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.csprojAssemblyReference.cache
+C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.csproj.CoreCompileInputs.cache
+C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.exe
+C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.pdb
