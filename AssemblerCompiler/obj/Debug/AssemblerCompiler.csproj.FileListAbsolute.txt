@@ -5,3 +5,10 @@ C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\obj\Debug\Assemb
 C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.csproj.CoreCompileInputs.cache
 C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.exe
 C:\Users\wally\source\repos\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.pdb
+G:\Dev\AssemblerCompiler\AssemblerCompiler\bin\Debug\AssemblerCompiler.exe.config
+G:\Dev\AssemblerCompiler\AssemblerCompiler\bin\Debug\AssemblerCompiler.exe
+G:\Dev\AssemblerCompiler\AssemblerCompiler\bin\Debug\AssemblerCompiler.pdb
+G:\Dev\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.csprojAssemblyReference.cache
+G:\Dev\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.csproj.CoreCompileInputs.cache
+G:\Dev\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.exe
+G:\Dev\AssemblerCompiler\AssemblerCompiler\obj\Debug\AssemblerCompiler.pdb

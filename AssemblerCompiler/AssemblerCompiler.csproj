@@ -43,13 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeLine.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="InstructionsManager.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="IInstruction.cs" />
     <Compile Include="InstructionType.cs" />
     <Compile Include="MainEntryPoint.cs" />
-    <Compile Include="Mov.cs" />
+    <Compile Include="Commands\Mov.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

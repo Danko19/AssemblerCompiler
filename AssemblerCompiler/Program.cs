@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace AssemblerCompiler
 {
     public class Program
     {
-        private readonly List<IInstruction> instructions = new List<IInstruction>();
+        private readonly List<Instruction> instructions = new List<Instruction>();
         private readonly string fileName;
 
         public Program(string fileName)
@@ -20,14 +19,9 @@ namespace AssemblerCompiler
             while (!Run()) {}
         }
 
-        private IEnumerable<CodeLine> ParseLines()
-        {
-            return File.ReadLines(fileName).Select(codeLine => new CodeLine(codeLine));
-        }
-
         private void InitInstructions()
         {
-            foreach (var codeLine in ParseLines())
+            foreach (var codeLine in File.ReadLines(fileName))
                 instructions.Add(InstructionsManager.CreateInstruction(codeLine));
         }
 

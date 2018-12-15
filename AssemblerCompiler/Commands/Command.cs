@@ -1,26 +1,19 @@
 ﻿namespace AssemblerCompiler.Commands
 {
-    public abstract class Command : IInstruction
+    public abstract class Command : Instruction
     {
-        private readonly CodeLine codeLine;
-
-        protected Command(CodeLine codeLine)
+        public override InstructionType Type => InstructionType.Command;
+        protected byte[] CodeBytes;
+        protected Command(string codeLine) 
+            : base(codeLine)
         {
-            this.codeLine = codeLine;
         }
 
-        protected string Name => this.GetType().Name;
-        protected string Label => codeLine.Label;
-        protected string Operand_1 => codeLine.Operand_1;
-        protected string Operand_2 => codeLine.Operand_2;
-        public InstructionType Type => InstructionType.Command;
-        public bool Done { get; set; }
-
-        protected abstract byte[] Compile();
-        public void Execute(Program program)
+        public override void Execute(Program program)
         {
-            Compile(); //todo 
-            throw new System.NotImplementedException();
+            Compile();
         }
+
+        protected abstract void Compile();
     }
 }
