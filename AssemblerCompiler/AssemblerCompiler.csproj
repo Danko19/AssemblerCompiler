@@ -43,16 +43,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binary\BinaryCode.cs" />
+    <Compile Include="Binary\Record.cs" />
+    <Compile Include="Binary\Block.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Binary\DescriptionBlock.cs" />
+    <Compile Include="Directives\Code.cs" />
+    <Compile Include="Directives\Data.cs" />
+    <Compile Include="Directives\Directive.cs" />
+    <Compile Include="Directives\End.cs" />
+    <Compile Include="Directives\Model.cs" />
     <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Instruction.cs" />
     <Compile Include="InstructionsManager.cs" />
     <Compile Include="Commands\Command.cs" />
-    <Compile Include="IInstruction.cs" />
     <Compile Include="InstructionType.cs" />
     <Compile Include="MainEntryPoint.cs" />
     <Compile Include="Commands\Mov.cs" />
+    <Compile Include="Binary\HeaderBlock.cs" />
+    <Compile Include="Binary\ObjectFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SegmnetType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

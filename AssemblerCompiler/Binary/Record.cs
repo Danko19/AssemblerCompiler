@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AssemblerCompiler.Extensions;
 
 namespace AssemblerCompiler.Binary
 {
@@ -23,7 +24,15 @@ namespace AssemblerCompiler.Binary
 
         public byte[] ToBytes()
         {
-            return new byte[] { 1}; //todo
+            var result = new List<byte>();
+            result.Add(Id);
+            result.AddRange(Length.InReverseByteOrder(2));
+            foreach (var binaryCode in content)
+            {
+                result.AddRange(binaryCode.ToBytes());
+            }
+            result.Add(GetControlByte(result));
+            return result.ToArray();
         }
 
         private byte GetControlByte(IEnumerable<byte> bytes)

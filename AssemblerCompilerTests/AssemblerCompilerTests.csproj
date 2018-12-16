@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryCodeTests.cs" />
     <Compile Include="ExtensionsTests.cs" />
     <Compile Include="InstructionsParsingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

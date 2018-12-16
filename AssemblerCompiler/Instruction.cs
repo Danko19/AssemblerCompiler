@@ -5,12 +5,12 @@ namespace AssemblerCompiler
 {
     public abstract class Instruction
     {
-        public Instruction(string codeLine)
+        protected Instruction(string codeLine)
         {
             Parse(codeLine);
         }
 
-        public bool Done { get; private set; }
+        public bool Done { get; set; }
         public string Label { get; private set; }
         public string Mnemonik => GetType().Name;
         public string[] Operands { get; private set; }

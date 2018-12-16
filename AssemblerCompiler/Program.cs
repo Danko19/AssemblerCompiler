@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using AssemblerCompiler.Binary;
 
 namespace AssemblerCompiler
 {
@@ -7,6 +8,13 @@ namespace AssemblerCompiler
     {
         private readonly List<Instruction> instructions = new List<Instruction>();
         private readonly string fileName;
+        private SegmnetType currentSegment;
+
+        public int DataSize { get; private set; }
+        public int CodeSize { get; private set; }
+        public int ReferenceSize { get; set; }
+
+        public readonly ObjectFile ObjectFile = new ObjectFile();
 
         public Program(string fileName)
         {
@@ -36,6 +44,34 @@ namespace AssemblerCompiler
             }
 
             return compiled;
+        }
+
+        public void AddDataLength(int size)
+        {
+            DataSize += size;
+        }
+
+        public void AddCodeLength(int size)
+        {
+            CodeSize += size;
+        }
+
+        public void StartSegment(SegmnetType segmnetType)
+        {
+            EndCurrentSegment();
+            if (segmnetType == SegmnetType.Data)
+                ObjectFile.DescriptionBlock.StartDataSegment();
+            if (segmnetType == SegmnetType.Code)
+                ObjectFile.DescriptionBlock.StartCodeSegment();
+            currentSegment = segmnetType;
+        }
+
+        public void EndCurrentSegment()
+        {
+            if (currentSegment == SegmnetType.Data)
+                ObjectFile.DescriptionBlock.EndSegment(DataSize);
+            if (currentSegment == SegmnetType.Code)
+                ObjectFile.DescriptionBlock.EndSegment(CodeSize);
         }
     }
 }
