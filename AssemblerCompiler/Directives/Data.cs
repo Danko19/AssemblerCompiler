@@ -2,6 +2,8 @@
 {
     public class Data : Directive
     {
+        public override int OperandsCount => 0;
+
         public Data(string codeLine) : base(codeLine)
         {
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace AssemblerCompiler.Binary
 {
@@ -11,15 +12,10 @@ namespace AssemblerCompiler.Binary
             records.Add(record);
         }
 
-        public byte[] ToBytes()
+        public void ToBytes(BinaryWriter binaryWriter)
         {
-            var result = new List<byte>();
             foreach (var record in records)
-            {
-                result.AddRange(record.ToBytes());
-            }
-
-            return result.ToArray();
+                binaryWriter.Write(record.ToBytes());
         }
     }
 }

@@ -10,9 +10,13 @@ namespace AssemblerCompiler
         private readonly string fileName;
         private SegmnetType currentSegment;
 
+        public readonly Dictionary<string, int> Labels = new Dictionary<string, int>();
         public int DataSize { get; private set; }
         public int CodeSize { get; private set; }
+        public int RunNumber { get; private set; }
+        public int Address => DataSize + CodeSize;
         public int ReferenceSize { get; set; }
+        public int LabelSize { get; set; }
 
         public readonly ObjectFile ObjectFile = new ObjectFile();
 
@@ -24,7 +28,9 @@ namespace AssemblerCompiler
         public void Compile()
         {
             InitInstructions();
-            while (!Run()) {}
+            while (!Run()) { }
+            ObjectFile.HeaderBlock.Fill(fileName);
+            ToBytes();
         }
 
         private void InitInstructions()
@@ -35,6 +41,7 @@ namespace AssemblerCompiler
 
         private bool Run()
         {
+            RunNumber++;
             var compiled = true;
             foreach (var instruction in instructions)
             {
@@ -72,6 +79,15 @@ namespace AssemblerCompiler
                 ObjectFile.DescriptionBlock.EndSegment(DataSize);
             if (currentSegment == SegmnetType.Code)
                 ObjectFile.DescriptionBlock.EndSegment(CodeSize);
+        }
+
+        private void ToBytes()
+        {
+            using (var fileStream = File.OpenWrite("result.obj"))
+            using (var binaryWriter = new BinaryWriter(fileStream))
+            {
+                ObjectFile.ToBytes(binaryWriter);
+            }
         }
     }
 }

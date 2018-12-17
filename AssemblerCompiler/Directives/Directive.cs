@@ -8,6 +8,8 @@
 
         public override void Execute(Program program)
         {
+            if (Label != null)
+                program.Labels[Label] = program.Address;
             Perform(program);
             Done = true;
         }

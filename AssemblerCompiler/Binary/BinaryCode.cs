@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using AssemblerCompiler.Extensions;
 
 namespace AssemblerCompiler.Binary
