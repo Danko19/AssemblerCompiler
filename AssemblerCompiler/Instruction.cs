@@ -5,8 +5,11 @@ namespace AssemblerCompiler
 {
     public abstract class Instruction
     {
-        protected Instruction(string codeLine)
+        protected readonly int LineNumber;
+
+        protected Instruction(int lineNumber, string codeLine)
         {
+            this.LineNumber = lineNumber;
             Parse(codeLine);
         }
 
@@ -20,11 +23,18 @@ namespace AssemblerCompiler
 
         private void Parse(string codeLine)
         {
-            var indexOf = codeLine.IndexOf(Mnemonik, StringComparison.OrdinalIgnoreCase);
-            Label = codeLine.Substring(0, indexOf).Clean().NullIfEmpty();
-            Operands = codeLine.Substring(indexOf + Mnemonik.Length).Clean().Split(',').ToOperands();
-            if (Operands.Length != OperandsCount)
-                throw new ArgumentException($"{Mnemonik} support only {OperandsCount} operands");
+            try
+            {
+                var indexOf = codeLine.IndexOf(Mnemonik, StringComparison.OrdinalIgnoreCase);
+                Label = codeLine.Substring(0, indexOf).Clean().NullIfEmpty();
+                Operands = codeLine.Substring(indexOf + Mnemonik.Length).Clean().Split(',').ToOperands();
+                if (Operands.Length != OperandsCount)
+                    throw new Exception();
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Line {LineNumber}: Unexpected syntax. { Mnemonik } support only { OperandsCount} operands");
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using AssemblerCompiler.Binary;
 using AssemblerCompiler.Extensions;
 
 namespace AssemblerCompiler.Commands
@@ -9,8 +10,8 @@ namespace AssemblerCompiler.Commands
         public override int OperandsCount => 2;
         protected override int Length => 3;
 
-        public Mov(string codeLine) 
-            : base(codeLine)
+        public Mov(int lineNumber, string codeLine) 
+            : base(lineNumber, codeLine)
         {
         }
         
@@ -26,7 +27,12 @@ namespace AssemblerCompiler.Commands
                 var d = Operands[0].OperandType == OperandType.Memory ? 1 : 0;
                 BinaryCode.AddBits(1, 0, 1, 0, 0, 0, d, w);
                 var inMemoryOperand = Operands.First(x => x.OperandType == OperandType.Memory);
-                BinaryCode.AddBytes(program.Labels[inMemoryOperand.Value].InReverseByteOrder(program.ReferenceSize));
+                var reference = program.Labels[inMemoryOperand.Value];
+                BinaryCode.AddBytes(reference.InReverseByteOrder(program.ReferenceSize));
+                program.ObjectFile.SegmentsBlock.CodeSegment.AddReference(
+                    new BinaryCode(0xC4)
+                        .AddBytes((Address - program.DataSize + 1 - reference).InReverseByteOrder(1))
+                        .AddBytes(0x14, 0x01, 0x02));
             }
             else if (Operands[0].OperandType == OperandType.Register)
             {

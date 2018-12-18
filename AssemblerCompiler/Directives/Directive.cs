@@ -1,17 +1,26 @@
-﻿namespace AssemblerCompiler.Directives
+﻿using System;
+
+namespace AssemblerCompiler.Directives
 {
     public abstract class Directive : Instruction
     {
-        protected Directive(string codeLine) : base(codeLine)
+        protected Directive(int lineNumber, string codeLine) : base(lineNumber, codeLine)
         {
         }
 
         public override void Execute(Program program)
         {
-            if (Label != null)
-                program.Labels[Label] = program.Address;
-            Perform(program);
-            Done = true;
+            try
+            {
+                if (Label != null)
+                    program.Labels[Label] = program.Address;
+                Perform(program);
+                Done = true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Line {LineNumber}: Unsupported using of derective {Mnemonik}");
+            }
         }
 
         protected abstract void Perform(Program program);

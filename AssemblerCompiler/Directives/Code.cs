@@ -4,7 +4,7 @@
     {
         public override int OperandsCount => 0;
 
-        public Code(string codeLine) : base(codeLine)
+        public Code(int lineNumber, string codeLine) : base(lineNumber, codeLine)
         {
         }
 

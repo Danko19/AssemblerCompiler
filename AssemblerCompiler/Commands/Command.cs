@@ -10,26 +10,29 @@ namespace AssemblerCompiler.Commands
         protected int Address { get; private set; }
         protected abstract int Length { get; }
         protected BinaryCode BinaryCode = new BinaryCode();
-        protected Command(string codeLine) 
-            : base(codeLine)
-        {
-        }
 
         public override void Execute(Program program)
         {
-            if (program.RunNumber == 1)
+            try
             {
-                Address = program.Address;
-                program.AddCodeLength(Length);
-                if (Label != null)
-                    program.Labels[Label] = Address;
-                program.ObjectFile.SegmentsBlock.CodeSegment.AddDefinition(BinaryCode);
+                if (program.RunNumber == 1)
+                {
+                    Address = program.Address;
+                    program.AddCodeLength(Length);
+                    if (Label != null)
+                        program.Labels[Label] = Address;
+                    program.ObjectFile.SegmentsBlock.CodeSegment.AddDefinition(BinaryCode);
+                }
+                if (!InMemoryOperandsReady(program))
+                    return;
+                Compile(program);
+                FillBinaryCode();
+                Done = true;
             }
-            if (!InMemoryOperandsReady(program))
-                return;
-            Compile(program);
-            FillBinaryCode();
-            Done = true;
+            catch (Exception e)
+            {
+                throw new Exception($"Line {LineNumber}: Unsupported call of command {Mnemonik}");
+            }
         }
 
         private bool InMemoryOperandsReady(Program program)
@@ -53,5 +56,9 @@ namespace AssemblerCompiler.Commands
         }
 
         protected abstract void Compile(Program program);
+
+        protected Command(int lineNumber, string codeLine) : base(lineNumber, codeLine)
+        {
+        }
     }
 }

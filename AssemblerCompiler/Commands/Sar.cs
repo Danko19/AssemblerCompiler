@@ -5,7 +5,7 @@ namespace AssemblerCompiler.Commands
 {
     public class Sar : Command
     {
-        public Sar(string codeLine) : base(codeLine)
+        public Sar(int lineNumber, string codeLine) : base(lineNumber, codeLine)
         {
         }
 

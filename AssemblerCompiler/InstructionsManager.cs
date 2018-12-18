@@ -8,30 +8,30 @@ namespace AssemblerCompiler
 {
     public static class InstructionsManager
     {
-        private static Dictionary<string, Func<string, Instruction>> registeredInstructions
-            = new Dictionary<string, Func<string, Instruction>>
+        private static Dictionary<string, Func<int, string, Instruction>> registeredInstructions
+            = new Dictionary<string, Func<int, string, Instruction>>
             {
-                {"add", (line) => new Add(line) },
-                {"cmp", (line) => new Cmp(line) },
-                {"jmp", (line) => new Jmp(line) },
-                {"jnz", (line) => new Jnz(line) },
-                {"mov", (line) => new Mov(line) },
-                {"pop", (line) => new Pop(line) },
-                {"push", (line) => new Push(line) },
-                {"sar", (line) => new Sar(line) },
-                {"std", (line) => new Std(line) },
+                {"add", (lineNumber, line) => new Add(lineNumber, line) },
+                {"cmp", (lineNumber, line) => new Cmp(lineNumber, line) },
+                {"jmp", (lineNumber, line) => new Jmp(lineNumber, line) },
+                {"jnz", (lineNumber, line) => new Jnz(lineNumber, line) },
+                {"mov", (lineNumber, line) => new Mov(lineNumber, line) },
+                {"pop", (lineNumber, line) => new Pop(lineNumber, line) },
+                {"push", (lineNumber, line) => new Push(lineNumber, line) },
+                {"sar", (lineNumber, line) => new Sar(lineNumber, line) },
+                {"std", (lineNumber, line) => new Std(lineNumber, line) },
 
-                {"model", (line) => new Model(line) },
-                {".code", (line) => new Code(line) },
-                {".data", (line) => new Data(line) },
-                {"end", (line) => new End(line) },
-                {"dw", (line) => new Dw(line) }
+                {"model", (lineNumber, line) => new Model(lineNumber, line) },
+                {".code", (lineNumber, line) => new Code(lineNumber, line) },
+                {".data", (lineNumber, line) => new Data(lineNumber, line) },
+                {"end", (lineNumber, line) => new End(lineNumber, line) },
+                {"dw", (lineNumber, line) => new Dw(lineNumber, line) }
             };
         
-        public static Instruction CreateInstruction(string codeLine)
+        public static Instruction CreateInstruction(int number, string codeLine)
         {
             var instruction = codeLine.ToLower().Split(' ').First(x => registeredInstructions.ContainsKey(x));
-            return registeredInstructions[instruction](codeLine);
+            return registeredInstructions[instruction](number, codeLine);
         }
     }
 }

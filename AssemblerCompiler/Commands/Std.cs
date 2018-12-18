@@ -4,7 +4,7 @@
     {
         protected override int Length => 1;
 
-        public Std(string codeLine) : base(codeLine)
+        public Std(int lineNumber, string codeLine) : base(lineNumber, codeLine)
         {
         }
 

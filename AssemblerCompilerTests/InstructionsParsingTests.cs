@@ -10,7 +10,7 @@ namespace AssemblerCompilerTests
         [Test]
         public void MovParse()
         {
-            var mov = new Mov("mov ax, 19");
+            var mov = new Mov(10, "mov ax, 19");
 
             mov.Label.Should().Be(null);
             mov.Operands.Length.Should().Be(2);

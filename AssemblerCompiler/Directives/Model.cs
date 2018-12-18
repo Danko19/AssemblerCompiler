@@ -6,10 +6,6 @@ namespace AssemblerCompiler.Directives
     {
         public override int OperandsCount => 1;
 
-        public Model(string codeLine) : base(codeLine)
-        {
-        }
-
         protected override void Perform(Program program)
         {
             if (Operands.Length != 1)
@@ -18,6 +14,10 @@ namespace AssemblerCompiler.Directives
                 throw new ArgumentException();
             program.ReferenceSize = 2;
             program.LabelSize = 1;
+        }
+
+        public Model(int lineNumber, string codeLine) : base(lineNumber, codeLine)
+        {
         }
     }
 }

@@ -4,7 +4,7 @@ namespace AssemblerCompiler.Commands
 {
     public class Pop : Command
     {
-        public Pop(string codeLine) : base(codeLine)
+        public Pop(int lineNumber, string codeLine) : base(lineNumber, codeLine)
         {
         }
 

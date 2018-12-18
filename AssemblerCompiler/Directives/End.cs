@@ -4,13 +4,13 @@
     {
         public override int OperandsCount => 0;
 
-        public End(string codeLine) : base(codeLine)
-        {
-        }
-
         protected override void Perform(Program program)
         {
             program.EndCurrentSegment();
+        }
+
+        public End(int lineNumber, string codeLine) : base(lineNumber, codeLine)
+        {
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using AssemblerCompiler.Binary;
 
 namespace AssemblerCompiler
@@ -27,23 +29,40 @@ namespace AssemblerCompiler
 
         public void Compile()
         {
-            InitInstructions();
-            while (!Run()) { }
-            ObjectFile.HeaderBlock.Fill(fileName);
-            ToBytes();
+            try
+            {
+                InitInstructions();
+                while (!Run()) { }
+                ObjectFile.HeaderBlock.Fill(fileName);
+                ObjectFile.DescriptionBlock.SetDgroup();
+                Console.WriteLine(Constants.CompilerName + " Copyright (c) 2018" + Environment.NewLine);
+                ToBytes();
+                Console.WriteLine("Error messages: none");
+                Console.WriteLine("Warning messages: none");
+                Console.WriteLine($"Passes: {RunNumber}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         private void InitInstructions()
         {
+            var number = 0;
             foreach (var codeLine in File.ReadLines(fileName))
-                instructions.Add(InstructionsManager.CreateInstruction(codeLine));
+            {
+                number++;
+                if (codeLine == string.Empty) continue;
+                instructions.Add(InstructionsManager.CreateInstruction(number, codeLine));
+            }
         }
 
         private bool Run()
         {
             RunNumber++;
             var compiled = true;
-            foreach (var instruction in instructions)
+            foreach (var instruction in instructions.Where(x => !x.Done))
             {
                 instruction.Execute(this);
                 if (!instruction.Done)
@@ -83,7 +102,12 @@ namespace AssemblerCompiler
 
         private void ToBytes()
         {
-            using (var fileStream = File.OpenWrite("result.obj"))
+            var outputFileName = fileName.Split('.').First();
+            outputFileName += ".obj";
+            if (File.Exists(outputFileName))
+                File.Delete(outputFileName);
+            Console.WriteLine($"Assembling file: {fileName} to {outputFileName}");
+            using (var fileStream = File.OpenWrite(outputFileName))
             using (var binaryWriter = new BinaryWriter(fileStream))
             {
                 ObjectFile.ToBytes(binaryWriter);

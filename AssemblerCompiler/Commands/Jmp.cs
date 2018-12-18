@@ -5,7 +5,7 @@ namespace AssemblerCompiler.Commands
 {
     public class Jmp : Command
     {
-        public Jmp(string codeLine) : base(codeLine)
+        public Jmp(int lineNumber, string codeLine) : base(lineNumber, codeLine)
         {
         }
 

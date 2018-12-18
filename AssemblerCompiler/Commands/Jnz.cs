@@ -5,7 +5,7 @@ namespace AssemblerCompiler.Commands
 {
     public class Jnz : Command
     {
-        public Jnz(string codeLine) : base(codeLine)
+        public Jnz(int lineNumber, string codeLine) : base(lineNumber, codeLine)
         {
         }
 

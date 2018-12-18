@@ -6,7 +6,7 @@ namespace AssemblerCompiler
     {
         static void Main(string[] args)
         {
-            var program = new Program(/*args.First()*/"new.asm");
+            var program = new Program(args.First());
             program.Compile();
         }
     }

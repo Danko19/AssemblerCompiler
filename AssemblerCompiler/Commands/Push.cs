@@ -4,7 +4,7 @@ namespace AssemblerCompiler.Commands
 {
     public class Push : Command
     {
-        public Push(string codeLine) : base(codeLine)
+        public Push(int lineNumber, string codeLine) : base(lineNumber, codeLine)
         {
         }
 

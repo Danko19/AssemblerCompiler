@@ -6,7 +6,7 @@ namespace AssemblerCompiler.Commands
 {
     public class Add : Command
     {
-        public Add(string codeLine) : base(codeLine)
+        public Add(int lineNumber, string codeLine) : base(lineNumber, codeLine)
         {
         }
 

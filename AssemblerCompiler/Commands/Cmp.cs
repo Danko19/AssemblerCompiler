@@ -6,7 +6,7 @@ namespace AssemblerCompiler.Commands
 {
     public class Cmp : Command
     {
-        public Cmp(string codeLine) : base(codeLine)
+        public Cmp(int lineNumber, string codeLine) : base(lineNumber, codeLine)
         {
         }
 
